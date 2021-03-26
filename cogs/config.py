@@ -8,7 +8,10 @@ config_response = """
 **Default config**
 ```yml
 effects:
-    - https://soundbible.com/grab.php?id=1542&type=mp3
+    - airhorn
+    # - rickroll
+blocked_channels:
+    # - 1234
 ```
 """
 
