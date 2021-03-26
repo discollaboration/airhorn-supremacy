@@ -6,7 +6,6 @@ from discord.ext.tasks import loop
 from random import randint, choice
 from discord import FFmpegPCMAudio, Guild
 from asyncio import get_event_loop
-from io import BytesIO
 
 
 class Airhorn(commands.Cog):
