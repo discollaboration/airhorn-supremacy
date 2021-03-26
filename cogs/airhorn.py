@@ -21,7 +21,7 @@ class Airhorn(commands.Cog):
     async def scan(self):
         await self.bot.logger.info("Playing voice clips")
         for guild in self.bot.guilds:
-            if randint(1, 5) != 4 and False:
+            if randint(1, 20) != 4:
                 continue
             self.loop.create_task(self.airboom(guild))
 
