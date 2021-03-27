@@ -15,7 +15,7 @@ blocked_channels:
 Clip types:
 `{clip_types}`
 
-Request clips using `!requestclip fart`
+Request clips using `ah!requestclip fart`
 """
 
 
@@ -35,6 +35,7 @@ class Config(commands.Cog):
     @commands.command()
     async def requestclip(self, ctx, *, request):
         await self.bot.logger.warn("Effect add request: " + request)
+        await ctx.send("The request is on it's way!")
 
 
 def setup(bot: Bot):
