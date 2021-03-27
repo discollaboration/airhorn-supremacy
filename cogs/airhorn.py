@@ -19,7 +19,7 @@ class Airhorn(commands.Cog):
     @loop(seconds=10)
     async def scan(self):
         for guild in self.bot.guilds:
-            if randint(1, 20) != 4:
+            if randint(1, 12) != 4:
                 continue
             self.loop.create_task(self.airboom(guild))
 
@@ -31,6 +31,8 @@ class Airhorn(commands.Cog):
         if clip_name is None:
             return
         self.playing_in.append(guild.id)
+
+        await self.bot.logger.info("Airbooming %s" % guild.name)
 
         audio = FFmpegPCMAudio("effects/%s.mp3" % clip_name)
         voice_state = await channel.connect()
