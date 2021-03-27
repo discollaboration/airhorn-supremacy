@@ -5,4 +5,4 @@ services:
             context: .
             dockerfile: Dockerfile
         env_file:
-            - example.env
+            - .env
