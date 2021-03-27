@@ -1,6 +1,6 @@
 FROM python:3.9
 RUN apt update
-RUN apt install ffmpeg
+RUN apt install -y ffmpeg
 RUN pip install poetry
 COPY poetry.lock ./
 COPY pyproject.toml ./
