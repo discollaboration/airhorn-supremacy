@@ -9,6 +9,7 @@ license = "MIT"
 python = "^3.9"
 botconfig = "^1.0.1"
 "discord.py" = {extras = ["voice"], version = "^1.6.0"}
+templatebot = "^1.0.3"
 
 [tool.poetry.dev-dependencies]
 
