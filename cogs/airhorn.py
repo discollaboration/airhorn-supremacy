@@ -18,7 +18,6 @@ class Airhorn(commands.Cog):
 
     @loop(seconds=10)
     async def scan(self):
-        await self.bot.logger.info("Playing voice clips")
         for guild in self.bot.guilds:
             if randint(1, 20) != 4:
                 continue
@@ -27,18 +26,14 @@ class Airhorn(commands.Cog):
     async def airboom(self, guild: Guild):
         channel = await self.get_channel(guild)
         if channel is None:
-            await self.bot.logger.info("No channel")
             return
         clip_name = await self.get_clip(guild)
         if clip_name is None:
-            await self.bot.logger.info("No clips")
             return
         self.playing_in.append(guild.id)
 
-        await self.bot.logger.info("Playing effect")
         audio = FFmpegPCMAudio("effects/%s.mp3" % clip_name)
         voice_state = await channel.connect()
-        await self.bot.logger.info("Connected to VC")
         voice_state.play(audio, after=self._after_play(guild.id))
 
     async def after_play(self, guild_id):
@@ -79,7 +74,7 @@ class Airhorn(commands.Cog):
 
         channels = []
         for channel in guild.voice_channels:
-            if len(channel.members) != 1 and channel.id not in blocked_channels:
+            if len(channel.members) != 0 and channel.id not in blocked_channels:
                 channels.append(channel)
         if len(channels) == 0:
             return None
