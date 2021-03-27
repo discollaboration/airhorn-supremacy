@@ -7,4 +7,4 @@ COPY poetry.lock ./
 COPY pyproject.toml ./
 RUN poetry install
 COPY . ./
-CMD ["poetry", "shell", "python", "main.py"]
+CMD ["poetry", "run", "python", "main.py"]
