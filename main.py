@@ -2,6 +2,7 @@ from templatebot import Bot
 from discord import Intents
 from os import getenv
 from botconfig.client import BotConfig
+from discord.ext.commands import MinimalHelpCommand
 
 intents = Intents.none()
 intents.voice_states = True
@@ -13,7 +14,7 @@ bot = Bot(
     command_prefix="ah!",
     intents=Intents.default(),
     logging_url=getenv("WEBHOOK"),
-    help_command=None,
+    help_command=MinimalHelpCommand(),
 )
 bot.config = BotConfig(getenv("BOT_ID"), getenv("CONFIG_TOKEN"))
 

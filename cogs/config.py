@@ -1,6 +1,5 @@
 from discord.ext import commands
 from templatebot import Bot
-from botconfig.client import BotConfig
 
 config_response = """
 <https://config.farfrom.world>
@@ -13,6 +12,10 @@ effects:
 blocked_channels:
     # - 1234
 ```
+Clip types:
+`{clip_types}`
+
+Request clips using `!requestclip fart`
 """
 
 
@@ -23,12 +26,15 @@ class Config(commands.Cog):
     @commands.command()
     async def config(self, ctx: commands.Context):
         if ctx.author.guild_permissions.administrator:
-            print("Granting access")
             await self.bot.config.grant_access(ctx.guild.id, ctx.author.id)
         else:
-            print("Revoking access")
             await self.bot.config.revoke_access(ctx.guild.id, ctx.author.id)
-        await ctx.send(config_response)
+        airhorn_cog = self.bot.get_cog("Airhorn")
+        await ctx.send(config_response.format(clip_types=", ".join(airhorn_cog.valid_clips)))
+
+    @commands.command()
+    async def requestclip(self, ctx, *, request):
+        await self.bot.logger.warn("Effect add request: " + request)
 
 
 def setup(bot: Bot):

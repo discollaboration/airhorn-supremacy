@@ -15,6 +15,7 @@ class Airhorn(commands.Cog):
         self.valid_clips = ["airhorn", "rickroll"]
         self.playing_in = []
         self.scan.start()
+        self.logger = self.bot.logger
 
     @loop(seconds=10)
     async def scan(self):
@@ -43,8 +44,8 @@ class Airhorn(commands.Cog):
         self.playing_in.remove(guild_id)
 
     def _after_play(self, guild_id):
-        def inner(err):
-            self.after_play(guild_id)
+        def inner(_):
+            self.loop.create_task(self.after_play(guild_id))
 
         return inner
 
@@ -52,7 +53,7 @@ class Airhorn(commands.Cog):
         config = await self.bot.config.get_config(guild.id)
         if not isinstance(config, dict):
             config = {}
-        clips = config.get("effects", ["rickroll"])
+        clips = config.get("effects", ["airhorn"])
         if not isinstance(clips, list):
             return None
         new_clips = []
@@ -76,6 +77,9 @@ class Airhorn(commands.Cog):
 
         channels = []
         for channel in guild.voice_channels:
+            perms = channel.permissions_for(guild.me)
+            if not (perms.connect and perms.view_channel and perms.speak):
+                continue
             if len(channel.members) != 0 and channel.id not in blocked_channels:
                 channels.append(channel)
         if len(channels) == 0:
