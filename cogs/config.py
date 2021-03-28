@@ -26,9 +26,15 @@ class Config(commands.Cog):
     @commands.command()
     async def config(self, ctx: commands.Context):
         if ctx.author.guild_permissions.administrator:
-            await self.bot.config.grant_access(ctx.guild.id, ctx.author.id)
+            try:
+                await self.bot.config.grant_access(ctx.guild.id, ctx.author.id)
+            except:
+                pass
         else:
-            await self.bot.config.revoke_access(ctx.guild.id, ctx.author.id)
+            try:
+                await self.bot.config.revoke_access(ctx.guild.id, ctx.author.id)
+            except:
+                pass
         airhorn_cog = self.bot.get_cog("Airhorn")
         await ctx.send(config_response.format(clip_types=", ".join(airhorn_cog.valid_clips)))
 
