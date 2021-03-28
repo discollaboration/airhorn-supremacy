@@ -17,10 +17,10 @@ class Airhorn(commands.Cog):
         self.scan.start()
         self.logger = self.bot.logger
 
-    @loop(seconds=10)
+    @loop(seconds=60)
     async def scan(self):
         for guild in self.bot.guilds:
-            if randint(1, 12) != 4:
+            if randint(1, 15) != 4:
                 continue
             self.loop.create_task(self.airboom(guild))
 
