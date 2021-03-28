@@ -4,4 +4,4 @@ RUN apt install -y ffmpeg
 RUN pip3 install discord.py botconfig
 WORKDIR bot
 COPY . ./
-CMD ["poetry", "run", "python", "main.py"]
+CMD ["python", "main.py"]
